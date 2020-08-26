@@ -5,6 +5,7 @@ var mosquitoImage, antImage, beeImage, player, playerImage;
 var groupM, groupB, groupA, BG, score;
 var gameover, restart, gameoverImage, restartImage;
 var groupM1, groupB1, groupA1;
+var groupM2;
 function preload() {
   mosquitoImage = loadImage("M2.png");
   antImage = loadImage("A2.png");
@@ -29,6 +30,7 @@ function setup() {
   groupM1=new Group();
   groupA1=new Group();
   groupB1=new Group();
+  groupM2=new Group();
   score=0;
   gameover = createSprite(400,300);
   gameover.addImage(gameoverImage);
@@ -67,13 +69,17 @@ function draw() {
      }
      */
   }
- 
-  else if (gamestate===END){
+                
+  if (gamestate===END){
    gameover.visible=true;
    restart.visible=true;
    groupM.velocityY=0;
    groupA.velocityY=0;
    groupB.velocityY=0;
+   groupM1.velocityY=0;
+   groupA1.velocityY=0;
+   groupB1.velocityY=0;
+   groupM2.velocityY=0;
    if (mousePressedOver(restart)) {
     reset();
   }
@@ -87,7 +93,7 @@ function mosquito() {
     var m=createSprite(random(50, 750), 0, 30, 30);
     m.addImage(mosquitoImage);
     m.shapeColor="black";
-    m.velocityY=random(25, 50);
+    m.velocityY=random(25, 30);
     m.lifetime=110;
     m.depth=player.depth;
     player.depth+=1;
@@ -99,7 +105,7 @@ function ant() {
     var a=createSprite(random(50, 750), 0, 30, 30);
     a.addImage(antImage);
     a.shapeColor="red";
-    a.velocityY=random(25, 50);
+    a.velocityY=random(25, 35);
     a.lifetime=110;
     a.depth=player.depth;
     player.depth+=1;
@@ -111,7 +117,7 @@ function bee() {
     var b=createSprite(random(740, 750), 0, 30, 30);
     b.addImage(beeImage);
     b.shapeColor="yellow";
-    b.velocityY=random(25, 50);
+    b.velocityY=random(25, 40);
     b.lifetime=110;
     b.depth=player.depth;
     player.depth+=1;
@@ -123,7 +129,7 @@ function mosquito1() {
     var m=createSprite(random(50, 750), 0, 30, 30);
     m.addImage(mosquitoImage);
     m.shapeColor="black";
-    m.velocityY=random(25, 50);
+    m.velocityY=random(25, 45);
     m.lifetime=110;
     m.depth=player.depth;
     player.depth+=1;
@@ -147,11 +153,23 @@ function bee1() {
     var b=createSprite(random(740, 750), 0, 30, 30);
     b.addImage(beeImage);
     b.shapeColor="yellow";
-    b.velocityY=random(25, 50);
+    b.velocityY=random(25, 55);
     b.lifetime=110;
     b.depth=player.depth;
     player.depth+=1;
     groupB1.add(b);
+  }
+}
+function mosquito2() {
+  if (frameCount% 45==0){
+    var m=createSprite(random(50, 750), 0, 30, 30);
+    m.addImage(mosquitoImage);
+    m.shapeColor="black";
+    m.velocityY=random(25, 60);
+    m.lifetime=110;
+    m.depth=player.depth;
+    player.depth+=1;
+    groupM2.add(m);
   }
 }
 function reset(){
@@ -161,9 +179,9 @@ function reset(){
   score=0;
 }
 function mouseClicked(){
-  if(groupM.isTouching(player)||groupM1.isTouching(player)){
+  if(groupM.isTouching(player)||groupM1.isTouching(player)||groupM2.isTouching(player)){
     groupM.destroyEach();
-    gamestate=END;
+    score-=5;
   }
   if(groupA.isTouching(player)||groupA1.isTouching(player)){
     groupA.destroyEach();
@@ -171,6 +189,6 @@ function mouseClicked(){
   }
   if(groupB.isTouching(player)||groupB1.isTouching(player)){
     groupB.destroyEach();
-    score-=3;
+    score+=3;
   }
 }
