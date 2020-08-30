@@ -18,7 +18,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(displayWidth-50, displayHeight-50);
   textSize(30);
   textFont("verdana");
   fill ("white");
@@ -32,10 +32,10 @@ function setup() {
   groupB1=new Group();
   groupM2=new Group();
   score=0;
-  gameover = createSprite(400,300);
+  gameover = createSprite(displayWidth/2-25, displayHeight/2-25);
   gameover.addImage(gameoverImage);
   
-  restart = createSprite(400,600);
+  restart = createSprite(displayWidth/2-25, displayHeight/2+175);
   restart.addImage(restartImage);
   gameover.scale=2.5;
   restart.scale=1;
@@ -55,7 +55,10 @@ function draw() {
     mosquito1();
     ant1();
     bee1(); 
-    /*
+    if (score>10){
+      gamestate=END;
+    }
+   /*
     if (mousePressedOver(groupA)){
       groupA.destroyEach();
       score+=1;
@@ -90,7 +93,7 @@ drawSprites();
 
 function mosquito() {
   if (frameCount% 45==0){
-    var m=createSprite(random(50, 750), 0, 30, 30);
+    var m=createSprite(random(50, displayWidth-75), 0, 30, 30);
     m.addImage(mosquitoImage);
     m.shapeColor="black";
     m.velocityY=random(25, 30);
@@ -102,7 +105,7 @@ function mosquito() {
 }
 function ant() {
   if (frameCount% 45==0){
-    var a=createSprite(random(50, 750), 0, 30, 30);
+    var a=createSprite(random(50, displayWidth-75), 0, 30, 30);
     a.addImage(antImage);
     a.shapeColor="red";
     a.velocityY=random(25, 35);
@@ -114,7 +117,7 @@ function ant() {
 }
 function bee() {
   if (frameCount% 55==0){
-    var b=createSprite(random(740, 750), 0, 30, 30);
+    var b=createSprite(random(740, displayWidth-75), 0, 30, 30);
     b.addImage(beeImage);
     b.shapeColor="yellow";
     b.velocityY=random(25, 40);
@@ -126,7 +129,7 @@ function bee() {
 }
 function mosquito1() {
   if (frameCount% 42==0){
-    var m=createSprite(random(50, 750), 0, 30, 30);
+    var m=createSprite(random(50, displayWidth-75), 0, 30, 30);
     m.addImage(mosquitoImage);
     m.shapeColor="black";
     m.velocityY=random(25, 45);
@@ -138,7 +141,7 @@ function mosquito1() {
 }
 function ant1() {
   if (frameCount% 48==0){
-    var a=createSprite(random(50, 750), 0, 30, 30);
+    var a=createSprite(random(50, displayWidth-75), 0, 30, 30);
     a.addImage(antImage);
     a.shapeColor="red";
     a.velocityY=random(25, 50);
@@ -150,7 +153,7 @@ function ant1() {
 }
 function bee1() {
   if (frameCount% 53==0){
-    var b=createSprite(random(740, 750), 0, 30, 30);
+    var b=createSprite(random(740, displayWidth-75), 0, 30, 30);
     b.addImage(beeImage);
     b.shapeColor="yellow";
     b.velocityY=random(25, 55);
@@ -162,7 +165,7 @@ function bee1() {
 }
 function mosquito2() {
   if (frameCount% 45==0){
-    var m=createSprite(random(50, 750), 0, 30, 30);
+    var m=createSprite(random(50, displayWidth-75), 0, 30, 30);
     m.addImage(mosquitoImage);
     m.shapeColor="black";
     m.velocityY=random(25, 60);
